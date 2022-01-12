@@ -39,7 +39,7 @@
 <body>
 
     <!-- Loading page -->
-    <div class="overlay">
+    <!-- <div class="overlay">
         <div class="overlayDoor"></div>
         <div class="overlayContent">
             <div class="loader">
@@ -47,78 +47,93 @@
             </div>
             <div class="skip">PLEASE WAIT / SKIP</div>
         </div>
-    </div>
+    </div> -->
     <!-- Loading page -->
+    
+
+    
 
 
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
 
-    <div class="contentOther">
-        <h1>This waits for EVERYTHING to load on the page.</h1>
-        <h1>Random Video</h1>
-        <iframe class="video" src="https://www.youtube.com/embed/mZY1yyrlJWU" frameborder="0" allowfullscreen=""></iframe>
-    </div>
-
+    <div id="loader">
+        <div class="preloader"></div>
+        <div class="loadBar">
+            <div class="progress"></div>
+            <div class="welcome">WELCOME</div>
+        </div>
+    </div>    
 
     <style>
-            
-        @import url("https://fonts.googleapis.com/css?family=Nunito:400,600,700|Roboto:300,400,500,700");
-        body {
+        * {
         margin: 0;
         padding: 0;
-        overflow: hidden;
-        }
-        body.loaded {
-        overflow-y: auto;
         }
 
-        .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 100000000;
-        }
-        .overlay .overlayDoor:before, .overlay .overlayDoor:after {
-        content: "";
-        position: absolute;
-        width: 50%;
-        height: 100%;
-        background: #111;
-        transition: 0.5s cubic-bezier(0.77, 0, 0.18, 1);
-        transition-delay: 0.8s;
-        }
-        .overlay .overlayDoor:before {
-        left: 0;
-        }
-        .overlay .overlayDoor:after {
-        right: 0;
-        }
-        .overlay.loaded .overlayDoor:before {
-        left: -50%;
-        }
-        .overlay.loaded .overlayDoor:after {
-        right: -50%;
-        }
-        .overlay.loaded .overlayContent {
+        .hidden {
         opacity: 0;
-        margin-top: -15px;
         }
-        .overlay .overlayContent {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        transition: 0.5s cubic-bezier(0.77, 0, 0.18, 1);
+
+        #loader {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #111;
         }
-        .overlay .overlayContent .skip {
+
+        .preloader {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            left: calc(50% - 20px);
+            top: calc(40% - 20px);
+            background: turquoise;
+            transform: rotate(45deg);
+            animation: preloader 2s linear infinite;
+        }
+
+        .loadBar {
+            position: absolute;
+            width: 200px;
+            height: 2px;
+            left: calc(50% - 100px);
+            top: calc(40% + 60px);
+            background: #111;
+        }
+
+        .progress {
+            position: relative;
+            width: 0%;
+            height: inherit;
+            background: turquoise;
+        }
+
+        @keyframes loading {
+            0% {
+                width: 0%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes preloader {
+            0%,
+            100% {
+                transform: rotate(45deg);
+            }
+
+            60% {
+                transform: rotate(405deg);
+            }
+        }
+
+        .loadBar .welcome {
         display: block;
         width: 130px;
         text-align: center;
-        margin: 50px auto 0;
+        margin: 40px auto 0;
         cursor: pointer;
         color: turquoise;
         font-family: "Nunito";
@@ -128,117 +143,35 @@
         border-radius: 3px;
         transition: 0.2s ease;
         }
-        .overlay .overlayContent .skip:hover {
+        .loadBar .welcome:hover {
         background: #ddd;
         color: #444;
         border-color: #ddd;
-        }
-
-        .loader {
-        width: 128px;
-        height: 128px;
-        border: 3px solid turquoise;
-        border-bottom: 3px solid transparent;
-        border-radius: 50%;
-        position: relative;
-        -webkit-animation: spin 1s linear infinite;
-                animation: spin 1s linear infinite;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        }
-        .loader .inner {
-        width: 64px;
-        height: 64px;
-        border: 3px solid transparent;
-        border-top: 3px solid turquoise;
-        border-radius: 50%;
-        -webkit-animation: spinInner 1s linear infinite;
-                animation: spinInner 1s linear infinite;
-        }
-
-        @-webkit-keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-        }
-
-        @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-        }
-        @-webkit-keyframes spinInner {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(-720deg);
-        }
-        }
-        @keyframes spinInner {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(-720deg);
-        }
-        }
-        body {
-        background: #eee;
-        }
-
-        .contentOther {
-        background: #fff;
-        width: 900px;
-        margin: 0 auto;
-        padding: 20px;
-        box-sizing: border-box;
-        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
-        }
-        .contentOther .video {
-        height: 484px;
-        width: 100%;
-        border-radius: 5px;
-        }
-        .contentOther h1 {
-        font-family: "Roboto";
-        margin: 0 0 10px 0;
-        font-weight: 400;
         }
     </style>
 
 
     <script>
-        $(document).ready(function() {
-        // Users can skip the loading process if they want.
-        $('.skip').click(function() {
-            $('.overlay, body').addClass('loaded');
-        })
-        
-        // Will wait for everything on the page to load.
-        $(window).bind('load', function() {
-            $('.overlay, body').addClass('loaded');
-            setTimeout(function() {
-                $('.overlay').css({'display':'none'})
-            }, 2000)
-        });
-        
-        // Will remove overlay after 1min for users cannnot load properly.
+        $(window).load(function() {
+
+        var rnd = Math.random() * (8000 - 2000) + 2000;
+
+        $('.progress').css("animation", "loading " + rnd + "ms linear");
+
+        console.log(rnd);
+
         setTimeout(function() {
-            $('.overlay, body').addClass('loaded');
-        }, 60000);
-    })
+
+        $('#loader').hide();
+        $('#page').removeClass('hidden');
+
+        }, rnd);
+
+    });
     </script>
 
 
-
+    <div id="page" class="hidden">
     <header id="header">
         <nav id="navbar">
         <ul>
@@ -298,6 +231,7 @@
         </div>
         <div id="createStickyBtn">+</div>
     </main>
+    </div>
 
     <style>
         html,
