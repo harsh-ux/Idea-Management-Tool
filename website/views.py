@@ -10,5 +10,5 @@ def highlights(request):
     highlights= StickyNotes.objects.all()
     context={
         'highlights': highlights
-    }
+    } 
     return render(request, 'index.html', context)
